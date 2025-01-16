@@ -1,4 +1,4 @@
-import {Job} from "../models/job.model";
+import {Job} from "../models/job.model.js";
 
 //admin will post the job
 export const postJob = async(req,res)=>{
@@ -91,7 +91,7 @@ export const getJobById = async(req,res)=>{
 
 
 // how many jobs are created by particular admin
-export const getAdminsJobs = async(req,res)=>{
+export const getAdminJobs = async(req,res)=>{
     try{
         const adminId = req.id;
         const jobs = await Job.find({created_by:adminId}).populate({

@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
         enum:['student','recruiter']
     },
     profile:{
-        bio:{type:string},
+        bio:{type:String},
         skills:[{type:String}],
         resume:{type:String},
         resumeOriginalName:{type:String},
@@ -37,4 +37,4 @@ const userSchema = new mongoose.Schema({
     }
 });
 
-export default mongoose.model('User',userSchema);
+export const User = mongoose.model('User',userSchema);
