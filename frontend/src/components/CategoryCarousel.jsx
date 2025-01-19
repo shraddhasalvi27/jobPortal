@@ -3,7 +3,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselItem,
   CarouselNext,
   CarouselPrevious,
 } from "./ui/carousel";

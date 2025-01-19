@@ -15,22 +15,31 @@ const CompanyCreate = () => {
     const [companyName, setCompanyName] = useState();
     const dispatch = useDispatch();
     const registerNewCompany = async () => {
-        try {
-            const res = await axios.post(`${COMPANY_API_END_POINT}/register`, {companyName}, {
-                headers:{
-                    'Content-Type':'application/json'
-                },
-                withCredentials:true
-            });
-            if(res?.data?.success){
-                dispatch(setSingleCompany(res.data.company));
-                toast.success(res.data.message);
-                const companyId = res?.data?.company?._id;
-                navigate(`/admin/companies/${companyId}`);
-            }
-        } catch (error) {
-            console.log(error);
+      try {
+        const res = await axios.post(
+          `${COMPANY_API_END_POINT}/register`,
+          { companyName },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          }
+        );
+        if (res?.data?.success) {
+          dispatch(setSingleCompany(res.data.company));
+          toast.success(res.data.message);
+          const companyId = res?.data?.company?._id;
+          navigate(`/admin/companies/${companyId}`);
         }
+      } catch (error) {
+        console.log(error);
+        if (error.response?.status === 409) {
+          toast.error("This company is already registered.");
+        } else {
+          toast.error(error.response?.data?.message || "Something went wrong.");
+        }
+      }
     }
     return (
         <div>
