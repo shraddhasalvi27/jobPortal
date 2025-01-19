@@ -9,9 +9,13 @@ import userRoute from "./routes/user.route.js";
 import companyRoute from "./routes/company.route.js";
 import jobRoute from "./routes/job.route.js";
 import applicationRoute from "./routes/application.route.js";
+import path from "path";
+import exp from "constants";
 const app = express();
 dotenv.config({});
 const PORT = process.env.PORT||3001;
+
+const __dirname = path.resolve();
 
 // middlewares
 app.use(express.json()); //parse json into js objects
@@ -30,6 +34,10 @@ app.use("/api/v1/company",companyRoute);
 app.use("/api/v1/job",jobRoute);
 app.use("/api/v1/application",applicationRoute);
 
+app.use(express.static(path.join(__dirname,"/frontend/dist")));
+app.get('*',(_ ,res)=>{
+    res.sendFile(path.resolve(__dirname,"frontend","dist","index.html"));
+})
 
 app.listen(PORT,()=>{
     connectDB();
