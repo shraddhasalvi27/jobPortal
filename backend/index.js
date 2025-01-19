@@ -23,7 +23,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
 
 const corsOption = {
-    origin: "http://localhost:5173",
+    origin: "https://hiresphere-xwm5.onrender.com",
     credentials: true
 }
 app.use(cors(corsOption));
